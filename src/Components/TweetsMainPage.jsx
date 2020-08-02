@@ -1,43 +1,44 @@
-import React from "react";
-import CreateTweet from "./CreateTweet";
-import ListOfTweets from "./ListOfTweets";
-import { getTweets } from "../lib/Api";
+import React from 'react';
+import CreateTweet from './CreateTweet';
+import ListOfTweets from './ListOfTweets';
+import { getTweets } from '../lib/Api';
 
 class TweetsMainPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tweets: [],
-    };
-  }
+    constructor(props) {
+        super(props);
+        const { currentUserName } = props
+        this.state = {
+            tweets: [],
+            name: currentUserName
+        }
+    }
 
-  componentDidMount = () => {
-    this.loadTweets();
-  };
+    componentDidMount = () => {
+        this.loadTweets();
+    }
 
-  loadTweets = async () => {
-    const response = await getTweets();
-    this.setState({
-      tweets: response.data.tweets,
-    });
-  };
+    loadTweets = async () => {
+        const response = await getTweets();
+        this.setState(
+            {
+                tweets: response.data.tweets
+            }
+        )
+    }
 
-  handleOnTweetSubmit = (value) => {
-    this.setState({ tweets: [...this.state.tweets, value] });
-    this.loadTweets();
-  };
+    handleOnTweetSubmit = (value) => {
+        this.setState({ tweets: [value, ...this.state.tweets] })
+        this.loadTweets()
+    }
 
-  render() {
-    return (
-      <div>
-        <CreateTweet
-          handleTweetSubmit={(value) => this.handleOnTweetSubmit(value)}
-        />
-        <ListOfTweets 
-          tweets={this.state.tweets} />
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <CreateTweet currentUserName={this.state.name} handleTweetSubmit={value => this.handleOnTweetSubmit(value)}  />
+                <ListOfTweets tweets={this.state.tweets} />
+            </div>
+        )
+    }
 }
 
-export default TweetsMainPage;
+export default TweetsMainPage
