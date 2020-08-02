@@ -1,8 +1,31 @@
 body {
-  background-color: black;
+  background-color:#00acee
 }
 
 .App {
   text-align: center;
   padding-top: 40px;
 }
+
+.navbar {
+  margin-bottom: 5%;
+}
+
+a {
+  color: white;
+  margin-right: 20px;
+}
+
+a:hover {
+  text-decoration: none;
+  color: gray;
+}
+
+a.active {
+  color: white;
+}
+
+.tweetForm {
+  position: relative;
+  width: 50%
+} 
