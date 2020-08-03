@@ -9,3 +9,4 @@ export function getTweets() {
 export function sendTweet(msg) {
     return axios.post(`${baseURL}/tweet`, msg);
 };
+
